@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/332938795713966991/f8efb37a9dc34c45bd90d570ad4448c7/artifacts
+end_time: 1680018323325
+entry_point_name: ''
+experiment_id: '332938795713966991'
+lifecycle_stage: active
+run_id: f8efb37a9dc34c45bd90d570ad4448c7
+run_name: SGDClass-RandOversamp
+run_uuid: f8efb37a9dc34c45bd90d570ad4448c7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680018318161
+status: 3
+tags: []
+user_id: cheno

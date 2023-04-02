@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/332938795713966991/3852c8c705c348e0a4354d04b02591cb/artifacts
+end_time: 1680312677906
+entry_point_name: ''
+experiment_id: '332938795713966991'
+lifecycle_stage: active
+run_id: 3852c8c705c348e0a4354d04b02591cb
+run_name: victorious-finch-198
+run_uuid: 3852c8c705c348e0a4354d04b02591cb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680017316784
+status: 3
+tags: []
+user_id: cheno

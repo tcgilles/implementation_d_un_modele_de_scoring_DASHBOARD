@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/332938795713966991
+creation_time: 1680017316470
+experiment_id: '332938795713966991'
+last_update_time: 1680017316470
+lifecycle_stage: active
+name: CV-LogisticRegression

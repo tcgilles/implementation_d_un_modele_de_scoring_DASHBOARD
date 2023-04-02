@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/956337705015443958
+creation_time: 1680207177806
+experiment_id: '956337705015443958'
+last_update_time: 1680207177806
+lifecycle_stage: active
+name: FineTuning-LightGBM
