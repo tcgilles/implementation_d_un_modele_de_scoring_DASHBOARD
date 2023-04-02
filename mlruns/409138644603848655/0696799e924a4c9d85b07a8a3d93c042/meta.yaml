@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/409138644603848655/0696799e924a4c9d85b07a8a3d93c042/artifacts
+end_time: 1680058473168
+entry_point_name: ''
+experiment_id: '409138644603848655'
+lifecycle_stage: active
+run_id: 0696799e924a4c9d85b07a8a3d93c042
+run_name: RFC-SMOTE
+run_uuid: 0696799e924a4c9d85b07a8a3d93c042
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680058467700
+status: 3
+tags: []
+user_id: cheno
