@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/110255187469409785
+creation_time: 1680078687927
+experiment_id: '110255187469409785'
+last_update_time: 1680078687927
+lifecycle_stage: active
+name: CV-XGBoost

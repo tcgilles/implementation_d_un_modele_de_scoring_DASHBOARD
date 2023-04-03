@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/332938795713966991/91767690c3064881b54bd9c0dfafe71d/artifacts
+end_time: 1680026276070
+entry_point_name: ''
+experiment_id: '332938795713966991'
+lifecycle_stage: active
+run_id: 91767690c3064881b54bd9c0dfafe71d
+run_name: SGDClass-SMOTE
+run_uuid: 91767690c3064881b54bd9c0dfafe71d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680026270618
+status: 3
+tags: []
+user_id: cheno

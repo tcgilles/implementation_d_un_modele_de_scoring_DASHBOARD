@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/110255187469409785/c75fc4be8245440186380f7d503be4d7/artifacts
+end_time: 1680102814127
+entry_point_name: ''
+experiment_id: '110255187469409785'
+lifecycle_stage: active
+run_id: c75fc4be8245440186380f7d503be4d7
+run_name: XGB-SMOTE
+run_uuid: c75fc4be8245440186380f7d503be4d7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680102808940
+status: 3
+tags: []
+user_id: cheno

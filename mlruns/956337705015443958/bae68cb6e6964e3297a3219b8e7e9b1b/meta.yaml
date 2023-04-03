@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/956337705015443958/bae68cb6e6964e3297a3219b8e7e9b1b/artifacts
+end_time: 1680223911214
+entry_point_name: ''
+experiment_id: '956337705015443958'
+lifecycle_stage: active
+run_id: bae68cb6e6964e3297a3219b8e7e9b1b
+run_name: LGBM-class_weight
+run_uuid: bae68cb6e6964e3297a3219b8e7e9b1b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680223904542
+status: 3
+tags: []
+user_id: cheno

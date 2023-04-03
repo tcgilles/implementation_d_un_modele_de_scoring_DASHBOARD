@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/170219347622667126/7c4ad31f735b43c5978d939d9e7bac63/artifacts
+end_time: 1680128850062
+entry_point_name: ''
+experiment_id: '170219347622667126'
+lifecycle_stage: active
+run_id: 7c4ad31f735b43c5978d939d9e7bac63
+run_name: LGBM-RandOverSamp
+run_uuid: 7c4ad31f735b43c5978d939d9e7bac63
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680128843719
+status: 3
+tags: []
+user_id: cheno
