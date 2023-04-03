@@ -1,24 +1,21 @@
-from dash import Dash, html, dcc, callback, Output, Input
+from dash import Dash, html, dcc, Output, Input
 import pandas as pd
 import dash_bootstrap_components as dbc
 import dash_daq as daq
 import numpy as np
-import plotly
+import shap
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import matplotlib.pyplot as plt
 
-# Loading the dataset already preprocessed
-df = pd.read_csv("../input/data_cleaned.csv", 
-                 index_col="SK_ID_CURR", 
-                 nrows=1000)
+# Loading the dataset of customers
+df = pd.read_csv("https://media.githubusercontent.com/media/tcgilles/tcgilles-oc_projet7/dashboard/data/customers_data.csv", 
+                 index_col="SK_ID_CURR", nrows=10000).sort_index()
 
-# Loading the dataset source and limiting its values to the customers in df
-df_source = pd.read_csv("../input/application_train.csv", 
-                        index_col="SK_ID_CURR", 
-                        nrows=2000)
-df_source = df_source.loc[df.index, :].drop(columns=["TARGET"])
-df_source = df[["TARGET"]].join(df_source)
+# Loading the dataset of shapley values
+df_shap_values = pd.read_csv("https://media.githubusercontent.com/media/tcgilles/tcgilles-oc_projet7/dashboard/data/shap_values.csv", 
+                             index_col="SK_ID_CURR", nrows=10000).sort_index()
 
 # Types of features
 continuous_feat = df.nunique()[df.nunique()>20].index.tolist()
@@ -28,12 +25,11 @@ categorical_feat_pie = df.nunique()[df.nunique()<=3].index.tolist()
 # List of customers
 customers_list = df.index.tolist()
 
-# probabilities
-np.random.seed(seed=42)
-df["probability"] = np.random.uniform(0, 1, len(customers_list))
-
 # Threshold
-threshold = 0.65
+threshold = 0.658
+
+# Adding a column TARGET
+df["TARGET"] = df["SCORE"].apply(lambda x: 0 if x < threshold else 1)
 
 # Initialize the app - incorporate css
 external_stylesheets=[dbc.themes.CYBORG]
@@ -57,10 +53,10 @@ scoring = dbc.Row([
                 html.H6("N° du client", style={"fontWeight": "bold", 
                                                "textAlign": "center"}), 
                 html.Div(
-                    dcc.Input(id="id_client", 
-                              value=100002, 
-                              type="number", 
-                              style={"textAlign": "center"}),
+                    dcc.Dropdown(id="id_client",
+                                 options=df.index.tolist(), 
+                                 placeholder="select a customer", 
+                                 style={"textAlign": "center"}),
                     style={"textAlign": "center"}
                         ),
                 html.Br(),
@@ -160,7 +156,7 @@ app.layout = html.Div([
 )
 def update_credit_status(unique_id):
     if unique_id in customers_list:
-        if df.loc[unique_id, "probability"] < threshold:
+        if df.loc[unique_id, "SCORE"] < threshold:
             result = "Crédit accordé"
             style = {"color": "green", "textAlign": "center"}
         else:
@@ -180,7 +176,7 @@ def set_value_gauge(unique_id):
     if unique_id not in customers_list:
         return 1
     else:
-        return df.loc[unique_id, "probability"]
+        return df.loc[unique_id, "SCORE"]
 
 
 @app.callback(
@@ -200,13 +196,13 @@ def set_options_feature_2(feature_1):
 def plot_dist(value, feature):
     fig = px.histogram(data_frame=df, 
                        x=feature, 
-                       color="TARGET", 
-                       color_discrete_map={0:"blue", 1:"red"},
+                       color="TARGET",
+                       color_discrete_map={0:"blue", 1:"red"}
                         )
     fig.add_trace(
         go.Scatter(
                    x=[value, value],
-                   y=[0, 20],
+                   y=[0, 100],
                    mode="lines",
                    line=go.scatter.Line(color="yellow"),
                    showlegend=False)
@@ -251,10 +247,8 @@ def plot_bivariate_graph(unique_id, feature1, feature2, xaxis_type, yaxis_type):
     if (unique_id in customers_list) and (feature1 != "") and (feature2 != ""):
         data = df.copy().drop(index=unique_id)
         fig = px.scatter(data, x=feature1, y=feature2, 
-                         color=data["TARGET"].map({0:"0", 1:"1"}),
-                         hover_name=data.index.to_numpy(), 
-                         color_discrete_map={"0":"blue", "1":"red"}, 
-                         labels={"color": "Crédit rejeté :"}) 
+                         color=data["SCORE"],
+                         hover_name=data.index.to_numpy()) 
         fig.add_trace(
             go.Scatter(
                     x=[df.loc[unique_id, feature1]],
