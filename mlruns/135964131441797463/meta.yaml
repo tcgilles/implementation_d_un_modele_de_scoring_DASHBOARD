@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/135964131441797463
+creation_time: 1680311735323
+experiment_id: '135964131441797463'
+last_update_time: 1680311735323
+lifecycle_stage: active
+name: Final_training_LGBM

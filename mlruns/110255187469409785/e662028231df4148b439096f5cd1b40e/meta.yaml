@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/110255187469409785/e662028231df4148b439096f5cd1b40e/artifacts
+end_time: 1680093542842
+entry_point_name: ''
+experiment_id: '110255187469409785'
+lifecycle_stage: active
+run_id: e662028231df4148b439096f5cd1b40e
+run_name: XGB-RandOversamp
+run_uuid: e662028231df4148b439096f5cd1b40e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680093537607
+status: 3
+tags: []
+user_id: cheno

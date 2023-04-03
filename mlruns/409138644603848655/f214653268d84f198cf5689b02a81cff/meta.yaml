@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/409138644603848655/f214653268d84f198cf5689b02a81cff/artifacts
+end_time: 1680042611805
+entry_point_name: ''
+experiment_id: '409138644603848655'
+lifecycle_stage: active
+run_id: f214653268d84f198cf5689b02a81cff
+run_name: RFC-RandOversamp
+run_uuid: f214653268d84f198cf5689b02a81cff
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1680042606696
+status: 3
+tags: []
+user_id: cheno

@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/409138644603848655
+creation_time: 1680029624360
+experiment_id: '409138644603848655'
+last_update_time: 1680029624360
+lifecycle_stage: active
+name: CV-RandomForest
