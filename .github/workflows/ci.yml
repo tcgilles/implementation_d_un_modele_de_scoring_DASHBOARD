@@ -17,5 +17,5 @@ jobs:
       - name: Run dashboard unit tests
         run: |
           pip3 install --user -r requirements.txt
-          python3 -m unittest -v test_dashboard.py
+          python3 -m unittest -v test.py
         shell: bash
