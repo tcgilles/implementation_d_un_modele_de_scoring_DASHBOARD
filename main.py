@@ -9,7 +9,7 @@ import requests
 from shap_plots import ShapExplainer
 
 # Loading the dataset of customers
-filepath = "./data/customers_data.csv"
+filepath = "customers_data.csv"
 df = pd.read_csv(filepath, index_col="SK_ID_CURR").sort_index()
 
 # Types of features
