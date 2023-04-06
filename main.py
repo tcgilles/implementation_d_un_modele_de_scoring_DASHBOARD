@@ -9,8 +9,14 @@ import requests
 from shap_plots import ShapExplainer
 
 # Loading the dataset of customers
-filepath = "customers_data.csv"
-df = pd.read_csv(filepath, index_col="SK_ID_CURR").sort_index()
+filepath1 = "./data/customers_data_1.csv"
+filepath2 = "./data/customers_data_2.csv"
+filepath3 = "./data/customers_data_3.csv"
+df = pd.concat([
+    pd.read_csv(filepath1),
+    pd.read_csv(filepath2),
+    pd.read_csv(filepath3),
+]).set_index("SK_ID_CURR").sort_index()
 
 # Types of features
 continuous_feat = df.nunique()[df.nunique()>10].index.tolist()
