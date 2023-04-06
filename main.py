@@ -37,6 +37,7 @@ shap_explainer = ShapExplainer()
 # Initialize the app - incorporate css
 external_stylesheets=[dbc.themes.CYBORG]
 app = Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 
 
 header = dbc.Row(
