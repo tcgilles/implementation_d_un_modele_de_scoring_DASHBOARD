@@ -10,7 +10,7 @@ from shap_plots import ShapExplainer
 
 # Loading the dataset of customers
 df = pd.read_csv("https://media.githubusercontent.com/media/tcgilles/oc_projet7_dashboard/main/data/customers_data.csv", 
-                 index_col="SK_ID_CURR").sort_index()
+                 index_col="SK_ID_CURR", nrows=10000).sort_index()
 
 # Types of features
 continuous_feat = df.nunique()[df.nunique()>10].index.tolist()
