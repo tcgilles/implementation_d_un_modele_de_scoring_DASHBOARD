@@ -7,7 +7,7 @@ import joblib
 
 # Loading the dataset of shapley values
 df_shap_values = pd.read_csv("https://media.githubusercontent.com/media/tcgilles/oc_projet7_dashboard/main/data/shap_values.csv", 
-                             index_col="SK_ID_CURR").sort_index()
+                             index_col="SK_ID_CURR", nrows=10000).sort_index()
 
 # Threshold
 threshold = 0.658
