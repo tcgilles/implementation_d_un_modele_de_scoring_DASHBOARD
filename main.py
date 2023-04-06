@@ -28,7 +28,7 @@ threshold = 0.658
 df["TARGET"] = df["SCORE"].apply(lambda x: 0 if x < threshold else 1)
 
 # API url
-api_url = 'http://127.0.0.1:8000/predict'
+api_url = 'https://api-home-credit-risk.herokuapp.com/predict'
 
 # Initializing the SHAP explainer
 shap_explainer = ShapExplainer()
@@ -261,9 +261,10 @@ def api_call(input_values):
 def set_value_gauge(unique_id):
     score = 0
     if unique_id in customers_list:
-        data = df.copy().loc[unique_id, :].fillna("_").to_dict()
-        del(data["SCORE"])
-        del(data["TARGET"])
+        data = df.copy().loc[unique_id, :]\
+                        .fillna("_")\
+                        .drop(columns=["SCORE", "TARGET"])\
+                        .to_dict()
         score = api_call(data)
     return score
 
