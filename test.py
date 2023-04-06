@@ -3,7 +3,6 @@ from main import (
     set_value_gauge, 
     update_credit_status, 
     plot_feature_importance_local,
-    plot_feature_importance_global,
     plot_continuous_features,
     plot_box,
     plot_pie,
@@ -40,12 +39,6 @@ class Tests(unittest.TestCase):
     def test_plot_feature_importance_local(self):
         result1 = plot_feature_importance_local(100045, 10)
         result2 = plot_feature_importance_local(1, 10)
-        self.assertNotEqual(result1, {})
-        self.assertEqual(result2, {})
-
-    def test_plot_feature_importance_global(self):
-        result1 = plot_feature_importance_global(100045, 10)
-        result2 = plot_feature_importance_global(1, 10)
         self.assertNotEqual(result1, {})
         self.assertEqual(result2, {})
 

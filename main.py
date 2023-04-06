@@ -9,8 +9,8 @@ import requests
 from shap_plots import ShapExplainer
 
 # Loading the dataset of customers
-df = pd.read_csv("https://media.githubusercontent.com/media/tcgilles/oc_projet7_dashboard/main/data/customers_data.csv", 
-                 index_col="SK_ID_CURR", nrows=10000).sort_index()
+filepath = "./data/customers_data.csv"
+df = pd.read_csv(filepath, index_col="SK_ID_CURR").sort_index()
 
 # Types of features
 continuous_feat = df.nunique()[df.nunique()>10].index.tolist()
@@ -338,14 +338,13 @@ def plot_feature_importance_local(customer_id, nb_features):
 
 @app.callback(
         Output("feature_importance_global", "figure"),
-        Input("id_client", "value"),
         Input("nb_features_global", "value"))
-def plot_feature_importance_global(customer_id, nb_features):
-    if customer_id in customers_list:
-        fig = shap_explainer.plot_global(nb_features)
-        return fig
-    else:
-        return {}
+def plot_feature_importance_global(nb_features):
+    background_data = df.copy().drop(columns=["SCORE", "TARGET"])
+    fig = shap_explainer.plot_global(background_data, 
+                                         nb_features)
+    return fig
+
     
 
 @app.callback(
@@ -467,7 +466,7 @@ def plot_pie(customer_id, feature):
 
     if customer_id in customers_list and feature:
         specs = [[{'type' : 'domain'}], [{'type' : 'domain'}]]
-        titles = ['Distribution pour tous les clients', 
+        titles = ['Tous les clients', 
                   'Pourcentage de clients défectueux par catégorie']
         fig = make_subplots(rows = 2, cols = 1, specs = specs, 
                             subplot_titles = titles)

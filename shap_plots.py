@@ -5,10 +5,6 @@ import plotly.graph_objects as go
 import shap
 import joblib
 
-# Loading the dataset of shapley values
-df_shap_values = pd.read_csv("https://media.githubusercontent.com/media/tcgilles/oc_projet7_dashboard/main/data/shap_values.csv", 
-                             index_col="SK_ID_CURR", nrows=10000).sort_index()
-
 # Threshold
 threshold = 0.658
 
@@ -16,22 +12,29 @@ class ShapExplainer:
     def __init__(self) -> None:
         self.model = joblib.load("model.pkl")
         self.explainer = shap.TreeExplainer(self.model)
-        self.df = df_shap_values
 
     
-    def plot_global(self, max_display:int):
-        # Change all the values of the DataFrame to their absolute value
-        data_global = self.df.copy().applymap(lambda x: abs(x))
+    def plot_global(self, 
+                    background_data:pd.core.frame.DataFrame,
+                    max_display:int):
+        # Get the absolute values of the shap values
+        shap_values = self.explainer.shap_values(background_data)
+        shap_values = np.abs(shap_values[1])
 
         # Get the average shap value of each feature and sort them
-        avg_contrib = pd.DataFrame(
-            {"feature": data_global.mean(0).index, 
-             "shap_values": data_global.mean(0).values
-             })
-        avg_contrib = avg_contrib.sort_values("shap_values").reset_index(drop=True)
+        shap_values = pd.DataFrame(
+            shap_values, 
+            index=background_data.index,
+            columns=background_data.columns
+            )
+        shap_values = pd.DataFrame({
+            "feature": shap_values.mean(0).index, 
+            "shap_values": shap_values.mean(0).values
+                    })
+        shap_values = shap_values.sort_values("shap_values").reset_index(drop=True)
 
         # Select only the top max_display features
-        X = avg_contrib.iloc[-max_display:, :]
+        X = shap_values.iloc[-max_display:, :]
 
         # Plots the barplot of average shap values for the top max_display
         # features
