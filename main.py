@@ -9,13 +9,13 @@ import requests
 from shap_plots import ShapExplainer
 
 # Loading the dataset of customers
-filepath1 = "./data/customers_data_1.csv"
-filepath2 = "./data/customers_data_2.csv"
-filepath3 = "./data/customers_data_3.csv"
+filepath1 = "https://raw.githubusercontent.com/tcgilles/oc_projet7_dashboard/staging/data/customers_data_1.csv"
+# filepath2 = "https://raw.githubusercontent.com/tcgilles/oc_projet7_dashboard/staging/data/customers_data_2.csv"
+# filepath3 = "https://raw.githubusercontent.com/tcgilles/oc_projet7_dashboard/staging/data/customers_data_3.csv"
 df = pd.concat([
     pd.read_csv(filepath1),
-    pd.read_csv(filepath2),
-    pd.read_csv(filepath3),
+    # pd.read_csv(filepath2),
+    # pd.read_csv(filepath3),
 ]).set_index("SK_ID_CURR").sort_index()
 
 # Types of features
