@@ -61,7 +61,6 @@ class ShapExplainer:
         raw_base_score = self.explainer.expected_value[1] # E(f(x))
         raw_customer_score = self.explainer.expected_value[1] \
                             + shap_values.values[:,:,1].sum() # f(x)
-        raw_threshold = np.log(threshold) # f(threshold)
 
         # Store the shap values and the features values of the sample
         values = shap_values[0,:,1].values
@@ -95,7 +94,7 @@ class ShapExplainer:
         max_ = max(raw_base_score, Y["shap_cumsum"].max())
 
         # Waterfall plot of the shap values
-        fig = go.Figure(go.Waterfall(
+        fig = go.Figure( go.Waterfall(
             x = Y["shap_values"],
             y = Y["features"],
             base = raw_base_score,
@@ -104,7 +103,8 @@ class ShapExplainer:
             measure = ["relative"]*len(Y),
             decreasing = {"marker":{"color":"green"}},
             increasing = {"marker":{"color":"red"}}
-        ))
+            )
+        )
 
         # Add the title
         fig.update_layout(
@@ -117,11 +117,10 @@ class ShapExplainer:
             title = dict(text = "Shap value (Log odds)"),
             tickangle = 75,
             tickmode="array",
-            tickvals=[raw_base_score, raw_customer_score, raw_threshold] \
+            tickvals=[raw_base_score, raw_customer_score] \
                     + list(np.arange(min_+0.05, max_-0.05, 0.2)),
             ticktext=[f"f(moy)={raw_base_score:.3f}", 
-                      f"f(client)={raw_customer_score:.3f}", 
-                      f"f(crit)={raw_threshold:.3f}"] \
+                      f"f(client)={raw_customer_score:.3f}"] \
                    + [str(round(i,1)) for i in np.arange(min_, max_, 0.2)]
         )
 
@@ -129,6 +128,3 @@ class ShapExplainer:
         fig.update_yaxes(griddash = "solid")
 
         return fig
-
-
-
