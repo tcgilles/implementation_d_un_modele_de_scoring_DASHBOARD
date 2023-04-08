@@ -14,9 +14,7 @@ df = pd.read_csv(filepath1).set_index("SK_ID_CURR").sort_index()
 
 # Types of features
 continuous_feat = df.nunique()[df.nunique()>10].index.tolist()
-categorical_feat_bar = df.nunique()[(df.nunique()<=10) & (df.nunique()>3)]\
-                         .index.tolist()
-categorical_feat_pie = df.nunique()[df.nunique()<=3].index.tolist()
+categorical_feat = df.nunique()[df.nunique()<=10].index.tolist()
 
 # List of customers
 customers_list = df.index.tolist()
@@ -149,8 +147,7 @@ feature_selection = dbc.Row([
                         
                         dbc.Col(
                             dcc.Dropdown(
-                                options = categorical_feat_pie + \
-                                            categorical_feat_bar,
+                                options = categorical_feat,
                                 placeholder="variable 3", 
                                 id="feature_3", 
                                 style={"textAlign": "center"}
@@ -212,24 +209,17 @@ bivariate_plot_section = dbc.Row([
                             dbc.Col(
                                 dcc.Graph(
                                     id="bivariate_graph", 
-                                    style={'height': 900}
+                                    style={'height': 800}
                                 ),
                                 width=8
                             ),
 
-                            dbc.Col([
-                                dcc.Dropdown(
-                                    options=categorical_feat_pie,
-                                    placeholder="variable 4", 
-                                    id="feature_4", 
-                                    style={"textAlign": "center"}
-                                ),
+                            dbc.Col(
                                 dcc.Graph(
-                                    style={'height': 865},
-                                    id="pie_feature_4"
-                                ),  
-                            ],
-                            width = 4
+                                    style={'height': 800},
+                                    id="pie_feature_3"
+                                ),
+                                width=4
                             )
                         ])
 
@@ -458,9 +448,9 @@ def plot_box(customer_id, feature):
     return fig
 
 @app.callback(
-    Output("pie_feature_4", "figure"),
+    Output("pie_feature_3", "figure"),
     Input("id_client", "value"),
-    Input("feature_4", "value"))
+    Input("feature_3", "value"))
 def plot_pie(customer_id, feature):
     fig = {}
 
